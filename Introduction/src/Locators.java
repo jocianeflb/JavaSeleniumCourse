@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Locators {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		System.getProperty("webdriver.chrome.driver", "src\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
@@ -26,7 +26,8 @@ public class Locators {
 		//WebElement passwordField = driver.findElement(By.tagName("Input[placeholder='Password']")); ???
 		passwordField.click();
 		passwordField.sendKeys("hello123");
-		driver.findElement(By.className("signInBtn")).click();
+		WebElement loginButton = driver.findElement(By.className("signInBtn"));
+		loginButton.click();
 		
 		//Get error message - incorrect password/username
 		//WebElement error = driver.findElement(By.cssSelector("p.error"));
@@ -59,11 +60,18 @@ public class Locators {
 		
 		WebElement infoMsg = driver.findElement(By.xpath("//p[@class='infoMsg']"));
 		System.out.println("Message: " + infoMsg.getText());
-		//p[@class='infoMsg']
-		
-		//button[@class='reset-pwd-btn']
-		
 		//*[@id="container"]/div[1]/form/p
+		
+		WebElement returnToLoginPageButton = driver.findElement(By.className("go-to-login-btn"));
+		returnToLoginPageButton.click();	
+		Thread.sleep(1000);
+		usernameField.sendKeys("rahul");
+		passwordField.sendKeys("rahulshettyacademy");
+		driver.findElement(By.id("chkboxOne")).click();
+		loginButton.click();
+		
+		
+		
 		
 		//driver.close();
 		//driver.quit();
